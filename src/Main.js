@@ -1,10 +1,9 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
 
-require('electron-reload')(__dirname, {
-  // Note that the path to electron may vary according to the main file
-  electron: require(`${__dirname}/../node_modules/electron`)
-});
+require('electron-reload')(__dirname);
+
+app.allowRendererProcessReuse = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -14,8 +13,8 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1500,
+    height: 720,
     webPreferences: {nodeIntegration: true }
   });
 
@@ -24,27 +23,50 @@ const createWindow = () => {
 
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   Menu.setApplicationMenu(mainMenu);
-
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
 };
+
+
+const saveBoard = () => {
+  
+}
+
+const loadBoard = () => {
+  
+}
 
 const mainMenuTemplate = [
   {
     label: "File",
     submenu: [
       {
-        label: "New"
+        label: "New",
+        role: 'reload'
       },
       {
-        label: "Save As"
+        label: "Save As",
+        click(){
+          saveBoard();
+        }
       },
       {
-        label: "Load"
+        label: "Load",
+        click(){
+          loadBoard();
+        }
       }
     ]
   }
 ]
+
+if(process.env.NODE_ENV !== 'production') {
+  mainMenuTemplate.push({
+    label: '',
+    accelerator: 'F12',
+    click(item, focusedWindow) {
+      focusedWindow.toggleDevTools();
+    }
+  })
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
