@@ -72,12 +72,14 @@ const handleClearFullRows = () => {
 
 const handleReroll = () => {
     console.log('generating random piece');
-    const nextPieceDiv = document.getElementById('next-piece');
-    const pieceNumber = Math.round(Math.random())
-    const piece = getNewPiece(pieceNumber);
-    piece.className = 'next-piece';
+    const nextBox = document.getElementById('next-box');
+    const currentPiece = nextBox.children[1];
+    const pieceNumber = Math.floor(Math.random()*7);
+    console.log(pieceNumber);
+    const nextPiece = getNewPiece(pieceNumber);
+    nextPiece.className = 'next-piece';
     
-    nextPieceDiv.innerHTML = piece.innerHTML;
+    nextBox.replaceChild(nextPiece, currentPiece);
 }
 
 const startPlay = (level) => {
@@ -86,10 +88,62 @@ const startPlay = (level) => {
 
 const getNewPiece = (pieceNum) => {
     const piece = document.createElement('DIV');
-    for(let i = 0; i < 4; i++) {
-        const block = document.createElement('DIV');
-        block.className = ('block');
-        piece.appendChild(block);
+    const grid = [];
+    if(pieceNum === 0){
+        piece.className = 't-piece';
+        grid.push([1,1,1]);
+        grid.push([0,1,0]);
+    }
+    else if(pieceNum === 1){
+        piece.className = 'j-piece';
+        grid.push([1,1,1]);
+        grid.push([0,0,1]);
+    }
+    else if(pieceNum === 2){
+        piece.className = 'z-piece';
+        grid.push([1,1,0]);
+        grid.push([0,1,1]);
+    }
+    else if(pieceNum === 3){
+        piece.className = 'o-piece';
+        grid.push([1,1]);
+        grid.push([1,1]);
+    }
+    else if(pieceNum === 4){
+        piece.className = 's-piece';
+        grid.push([0,1,1]);
+        grid.push([1,1,0]);
+    }
+    else if(pieceNum === 5){
+        piece.className = 'l-piece';
+        grid.push([1,1,1]);
+        grid.push([1,0,0]);
+    }
+    else if(pieceNum === 6){
+        piece.className = 'i-piece';
+        grid.push([1,1,1,1]);
+    }
+    piece.innerHTML = arrayToGrid(grid).innerHTML;
+    return piece;
+}
+
+const arrayToGrid = (arr) => {
+    if(!arr) {
+        return
+    }
+    let array = Array.from(arr);
+    const piece = document.createElement('DIV');
+    const height = array.length;
+    const width = array[0].length;
+
+    for(let i = 0; i < height; i++) {
+        const row = document.createElement('DIV');
+        for(let j = 0; j < width; j++){
+            const block = document.createElement('DIV');
+            block.className = array[i][j] ? 'block filled-block' : 'block no-border';
+            row.appendChild(block);
+        }
+        piece.appendChild(row);
     }
     return piece;
 }

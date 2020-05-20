@@ -29,8 +29,8 @@ button:active {
 }
 
 .col {
-  margin-left: 1px;
-  margin-right: 1px;
+  margin-left: 2px;
+  margin-right: 2px;
   display: flex;
   flex-direction: column;
 }
@@ -45,13 +45,14 @@ button:active {
   min-height: 420px;
   min-width: 220px;
   border: solid 5px silver;
-  border-radius: 1px;
+  border-radius: 5px;
 }
 
 .row {
   display: flex;
   flex-direction: row;
 }
+
 
 .block {
   width: 30px;
@@ -62,6 +63,24 @@ button:active {
 
 .filled-block {
   background-color: blue;
+  border: solid 3px white;
+}
+
+.no-border {
+  border: none;
+}
+
+.next-piece {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+}
+
+.next-piece > div {
+  display: flex;
+  flex-direction: row;
 }
 
 #next-box {
@@ -75,13 +94,5 @@ button:active {
   min-width: 140px;
   min-height: 140px;
   border: solid 5px silver;
-  border-radius: 1px;
-}
-
-#next-piece {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 75%;
+  border-radius: 5px;
 }
