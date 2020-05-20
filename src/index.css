@@ -63,7 +63,22 @@ button:active {
 
 .filled-block {
   background-color: blue;
-  border: solid 3px white;
+  border: solid 2px white;
+}
+
+.color-1 {
+  background-color: white;
+  border: solid 2px blue;
+}
+
+.color-2 {
+  background-color: red;
+  border: solid 2px white;
+}
+
+.color-3 {
+  background-color: blue;
+  border: solid 2px white;
 }
 
 .no-border {

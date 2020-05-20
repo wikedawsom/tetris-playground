@@ -77,7 +77,7 @@ const handleReroll = () => {
     const pieceNumber = Math.floor(Math.random()*7);
     console.log(pieceNumber);
     const nextPiece = getNewPiece(pieceNumber);
-    nextPiece.className = 'next-piece';
+    nextPiece.className += ' next-piece';
     
     nextBox.replaceChild(nextPiece, currentPiece);
 }
@@ -89,45 +89,54 @@ const startPlay = (level) => {
 const getNewPiece = (pieceNum) => {
     const piece = document.createElement('DIV');
     const grid = [];
+    let color = 0;
+
     if(pieceNum === 0){
         piece.className = 't-piece';
         grid.push([1,1,1]);
         grid.push([0,1,0]);
+        color = 1;
     }
     else if(pieceNum === 1){
         piece.className = 'j-piece';
         grid.push([1,1,1]);
         grid.push([0,0,1]);
+        color = 3;
     }
     else if(pieceNum === 2){
         piece.className = 'z-piece';
         grid.push([1,1,0]);
         grid.push([0,1,1]);
+        color = 2;
     }
     else if(pieceNum === 3){
         piece.className = 'o-piece';
         grid.push([1,1]);
         grid.push([1,1]);
+        color = 1;
     }
     else if(pieceNum === 4){
         piece.className = 's-piece';
         grid.push([0,1,1]);
         grid.push([1,1,0]);
+        color = 3;
     }
     else if(pieceNum === 5){
         piece.className = 'l-piece';
         grid.push([1,1,1]);
         grid.push([1,0,0]);
+        color = 2;
     }
     else if(pieceNum === 6){
         piece.className = 'i-piece';
         grid.push([1,1,1,1]);
+        color = 1;
     }
-    piece.innerHTML = arrayToGrid(grid).innerHTML;
+    piece.innerHTML = arrayToGrid(grid, color).innerHTML;
     return piece;
 }
 
-const arrayToGrid = (arr) => {
+const arrayToGrid = (arr, color) => {
     if(!arr) {
         return
     }
@@ -140,7 +149,7 @@ const arrayToGrid = (arr) => {
         const row = document.createElement('DIV');
         for(let j = 0; j < width; j++){
             const block = document.createElement('DIV');
-            block.className = array[i][j] ? 'block filled-block' : 'block no-border';
+            block.className = array[i][j] ? `block filled-block color-${color}` : 'block no-border';
             row.appendChild(block);
         }
         piece.appendChild(row);
