@@ -15,7 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const flipBlockColor = (e) => {
     e.preventDefault();
-    e.target.className = e.target.className === "block" ? "block filled-block" : "block";
+    const empty = "block";
+    const currentBox = document.getElementById('current-box');
+    const currentPieceDiv = currentBox.children[1];
+    filled = currentPieceDiv.childNodes[0] && currentPieceDiv.childNodes[0].childNodes[1] ? currentPieceDiv.childNodes[0].childNodes[1].className : "block filled-block"
+    e.target.className = e.target.className === empty ? filled : empty;
 }
 
 const flipRowColor = (e) => {
@@ -71,15 +75,20 @@ const handleClearFullRows = () => {
 }
 
 const handleReroll = () => {
-    console.log('generating random piece');
+    //console.log('generating random piece');
     const nextBox = document.getElementById('next-box');
-    const currentPiece = nextBox.children[1];
+    const currentBox = document.getElementById('current-box');
+    const currentPieceDiv = currentBox.children[1];
+    const nextPieceDiv = nextBox.children[1];
     const pieceNumber = Math.floor(Math.random()*7);
-    console.log(pieceNumber);
+    //console.log(pieceNumber);
     const nextPiece = getNewPiece(pieceNumber);
-    nextPiece.className += ' next-piece';
-    
-    nextBox.replaceChild(nextPiece, currentPiece);
+    nextPiece.className += ' preview-piece';
+
+    if(nextPieceDiv && currentPieceDiv) {
+        currentBox.replaceChild(nextPieceDiv.cloneNode(true), currentPieceDiv)
+    }
+    nextBox.replaceChild(nextPiece, nextPieceDiv);
 }
 
 const startPlay = (level) => {

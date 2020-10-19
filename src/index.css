@@ -85,7 +85,7 @@ button:active {
   border: none;
 }
 
-.next-piece {
+.preview-piece {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,12 +93,12 @@ button:active {
   height: 75%;
 }
 
-.next-piece > div {
+.preview-piece > div {
   display: flex;
   flex-direction: row;
 }
 
-#next-box {
+.preview-box {
   color: white;
   font-size: larger;
   justify-content: space-around;
