@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearLinesButton = document.getElementById('clear-lines-btn');
     clearLinesButton.addEventListener('click', (e) => handleClearFullRows(e));
     const rerollRNGButton = document.getElementById('reroll-btn');
-    rerollRNGButton.addEventListener('click', (e) => handleReroll());
+    rerollRNGButton.addEventListener('click', (e) => handleReroll(e));
     handleReroll()
 });
 
@@ -74,6 +74,25 @@ const handleClearFullRows = () => {
     return
 }
 
+const mouseMoveCursorFollow = ((e) => {
+    let piece = document.getElementById('current-box').children[1];
+    piece.style.left = e.pageX + 'px';
+    piece.style.top = e.pageY + 'px';
+});
+
+const handleFollowCursor = ((e) => {
+    e.preventDefault;
+    let piece = document.getElementById('current-box').children[1];
+    
+    piece.removeEventListener('click', handleFollowCursor)
+    piece.style.position = "absolute";
+    piece.style.transform = "translate(-50%,-50%)";
+    document.addEventListener('mousemove', mouseMoveCursorFollow)
+    piece.addEventListener('click', (e) => {
+        document.removeEventListener('mousemove', mouseMoveCursorFollow)
+    })
+})
+
 const handleReroll = () => {
     //console.log('generating random piece');
     const nextBox = document.getElementById('next-box');
@@ -86,7 +105,9 @@ const handleReroll = () => {
     nextPiece.className += ' preview-piece';
 
     if(nextPieceDiv && currentPieceDiv) {
-        currentBox.replaceChild(nextPieceDiv.cloneNode(true), currentPieceDiv)
+        const currentPiece = nextPieceDiv.cloneNode(true)
+        currentBox.replaceChild(currentPiece, currentPieceDiv);
+        currentPiece.addEventListener('click', handleFollowCursor)
     }
     nextBox.replaceChild(nextPiece, nextPieceDiv);
 }
@@ -145,6 +166,12 @@ const getNewPiece = (pieceNum) => {
     return piece;
 }
 
+// for finding the name of the piece given it's index
+const indexToLetter = [
+    't','j','z','o','s','l','i'
+]
+
+// convery 2-d array into tetris grid
 const arrayToGrid = (arr, color) => {
     if(!arr) {
         return
@@ -158,7 +185,7 @@ const arrayToGrid = (arr, color) => {
         const row = document.createElement('DIV');
         for(let j = 0; j < width; j++){
             const block = document.createElement('DIV');
-            block.className = array[i][j] ? `block filled-block color-${color}` : 'block no-border';
+            block.className = array[i][j] ? `block filled-block color-${color}` : 'block transparent-block';
             row.appendChild(block);
         }
         piece.appendChild(row);

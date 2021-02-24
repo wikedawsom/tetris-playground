@@ -1,4 +1,5 @@
-Line clear function
+Line clear counter
+-Piece counter
 
 File I/O
 
@@ -8,6 +9,6 @@ Different colors for newlt dropped pieces
 
 Next Box Re-Roll
 
-Placement Backtracking
+Placement Backtracking (ctrl-z)
 
 Real gameplay option, with variable speeds

@@ -15,11 +15,16 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 600,
     height: 800,
+    show: false,
     webPreferences: {nodeIntegration: true }
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  })
 
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   Menu.setApplicationMenu(mainMenu);

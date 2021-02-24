@@ -85,6 +85,11 @@ button:active {
   border: none;
 }
 
+.transparent-block {
+  background-color: transparent;
+  border: none;
+}
+
 .preview-piece {
   display: flex;
   flex-direction: column;
