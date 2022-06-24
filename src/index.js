@@ -1,7 +1,3 @@
-const electron = require('electron');
-const fs = require('fs')
-const {ipcRenderer} = electron;
-
 document.addEventListener('DOMContentLoaded', () => {
     createBlankBoard();
 

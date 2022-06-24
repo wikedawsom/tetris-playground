@@ -6,19 +6,25 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <div id="board"></div>
-    <div class="col">
-      <div id="current-box" class="preview-box">
-        <div>Current</div>
-        <div class="preview-piece"></div>
+    <div class="flex-row">
+      <div id="board"></div>
+      <div class="col">
+        <div id="current-box" class="preview-box">
+          <div>Current</div>
+          <div class="preview-piece"></div>
+        </div>
+        <div id="next-box" class="preview-box">
+          <div>Next</div>
+          <div class="preview-piece"></div>
+        </div>
+        <button id="reroll-btn">Roll Random</button>
+        <button id="clear-lines-btn">Clear Lines</button>
       </div>
-      <div id="next-box" class="preview-box">
-        <div>Next</div>
-        <div class="preview-piece"></div>
-      </div>
-      <button id="reroll-btn">Roll Random</button>
-      <button id="clear-lines-btn">Clear Lines</button>
     </div>
+    
+    <p>*Left click a square to fill or empty it</p>
+    <p>*Right click to fill or empty a whole row</p>
+    <p>*"Clear Lines" to clear full rows and move down all rows above</p>
   </body>
-  <script>require("./index.js")</script>
+  <script src="index.js"></script>
 </html>

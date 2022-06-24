@@ -6,6 +6,7 @@
   "main": "src/Main.js",
   "scripts": {
     "start": "electron-forge start",
+    "start:dev": "nodemon ./server.js",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -44,16 +45,18 @@
   "dependencies": {
     "electron-forge": "^5.2.4",
     "electron-reload": "^1.5.0",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.18.1"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.51",
+    "@electron-forge/cli": "^6.0.0-beta.64",
     "@electron-forge/maker-deb": "^6.0.0-beta.51",
     "@electron-forge/maker-rpm": "^6.0.0-beta.51",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
     "@electron-forge/maker-zip": "^6.0.0-beta.51",
     "electron": "8.3.0",
     "electron-packager": "^14.2.1",
-    "electron-prebuilt-compile": "8.2.0"
+    "electron-prebuilt-compile": "8.2.0",
+    "nodemon": "^2.0.18"
   }
 }
